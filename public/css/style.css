@@ -1,0 +1,198 @@
+body {
+    font-family: "Plus Jakarta Sans", serif !important;
+    font-optical-sizing: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.navbar-brand {
+    color: #fe424d;
+}
+
+/* Footer */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+.Explore{
+    color: #fe424d !important;
+}
+
+/* Cards */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400;
+
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card-Overlay */
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* New Page */
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Edit Page */
+
+.edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Show page */
+.show-img {
+    height: 40vh;
+
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* MapBox Styling */
+#map {
+    height: 400px;
+    width: 95vh;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px grey;
+}
+
+
+/* NavBar search */
+
+.search-btn{
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0px 1rem 0 1rem;
+}
+.search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+}
+.search-inp{
+     border-radius: 25px;
+     padding: 0.5rem 3rem 0.5rem 3rem;
+     font-size: 1rem;
+}
+
+
+/* Top Filters */
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+}
+.taxInfo{
+    display: none;
+}
+.tax-toggle{
+    border: 1px solid black;
+    height: 3rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+    margin-left: 5rem;
+}
