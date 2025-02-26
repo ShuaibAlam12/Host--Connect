@@ -1,7 +1,6 @@
 if(process.env.NODE_ENV!="production"){
     require('dotenv').config();
 }
-// console.log(process.env.CLOUD_KEY);
 
 const express = require("express");
 const app = express();
@@ -11,6 +10,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const expressError=require("./utils/expressError.js");
 const session=require("express-session");
+const MongoStore = require('connect-mongo');
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
@@ -27,8 +27,27 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname,'public')));
 
+// const MONGO_URL = "mongodb://127.0.0.1:27017/hostconnect"; for local database
+const dbUrl=process.env.ATLASDB_URL;//for MONGO ATLAS cloud database
+
+
+//Connect session for MONGO Store
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET_KEY,
+    },
+    touchAfter:24*60*60,//24 hour tak ek session ko rakhega uske baad delete kar dega 
+})
+
+store.on("error",(err)=>{
+    console.log("ERROR in Mongo Store",err);
+    
+})
+
 const sessionOptions={
-    secret:"thisismysecretkey",
+    store,
+    secret:process.env.SECRET_KEY,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -39,7 +58,7 @@ const sessionOptions={
 }
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/hostconnect";
+
 main().then((res) => {
     console.log("Connected to DB");
 
@@ -48,8 +67,10 @@ main().then((res) => {
 
 })
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
+
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -68,18 +89,11 @@ app.use((req,res,next)=>{
     res.locals.currUser=req.user;
     next();
 })
-// app.get("/demouser",async (req,res)=>{
-//     let fakeUser=new User({
-//         email:"shuaib.alam@gmail.com",
-//         username:"shuaib"
-//     })
-//     let registerUser= await User.register(fakeUser,"alam_1234");
-//     res.send(registerUser);
-// })
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
+
 //Error Handler
 app.all("*",(req,res,next)=>{
     next(new expressError(402,"Page not found!"));
