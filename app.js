@@ -21,7 +21,7 @@ const userRouter=require("./routes/user.js");
 
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "Views"));
+app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
@@ -101,7 +101,7 @@ app.all("*",(req,res,next)=>{
 
 app.use((err, req, res, next) => {
     let {status=500,message="its wrong"}=err;
-    res.status(status).render("error.ejs",{message});
+    res.status(status).render("error",{message});
 });
 
 let port = 3000;
